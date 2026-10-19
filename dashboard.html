@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multimodal Sentiment Analysis - Input & Output</title>
+    <style>
+            /* Reset some default styles */
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            /* Body and overall page setup */
+            body {
+                font-family: 'Arial', sans-serif;
+                line-height: 1.6;
+                background-color: #f4f4f4;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                flex-direction: column;
+            }
+    
+            /* Header (Navigation Bar) */
+            header {
+                background-color: #2c3e50; /* Darker shade of blue */
+                color: white;
+                padding: 10px 0;
+                width: 100%;
+                position: absolute;
+                top: 0;
+            }
+    
+            header nav {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 20px;
+            }
+    
+            header nav .logo h1 {
+                font-size: 24px;
+            }
+    
+            header nav ul {
+                list-style: none;
+                display: flex;
+            }
+    
+            header nav ul li {
+                margin-left: 20px;
+            }
+    
+            header nav ul li a {
+                color: white;
+                text-decoration: none;
+                font-size: 18px;
+            }
+    
+            /* Main Section */
+            .input-output-container {
+                background-color: white;
+                border-radius: 8px;
+                padding: 40px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                width: 100%;
+                max-width: 600px;
+            }
+    
+            .input-output-container h2 {
+                text-align: center;
+                font-size: 28px;
+                margin-bottom: 20px;
+                color: red;
+            }
+    
+            /* Input fields */
+            .input-fields {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 20px;
+            }
+    
+            .input-fields input,
+            .input-fields textarea {
+                padding: 12px;
+                margin: 10px 0;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 16px;
+            }
+    
+            /* Submit button */
+            .submit-btn {
+                width: 100%;
+                padding: 12px;
+                background-color: #ff6f61;
+                color: white;
+                font-size: 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+    
+            .submit-btn:hover {
+                background-color: yellowgreen;
+                    color: black;
+            }
+    
+            /* Output Section */
+            .output-section {
+                margin-top: 20px;
+                text-align: center;
+            }
+    
+            .sentiment-output {
+                font-size: 24px;
+                margin-bottom: 20px;
+                font-weight: bold;
+                padding: 10px;
+                border-radius: 5px;
+            }
+    
+            .rating {
+                font-size: 32px;
+                margin-bottom: 20px;
+            }
+    
+            .stars {
+                color: gold;
+            }
+    
+            footer {
+                background-color: #2c3e50;
+                color: white;
+                text-align: center;
+                padding: 20px;
+                width: 100%;
+                position: fixed;
+                bottom: 0;
+            }
+        </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>Multimodal Sentiment Analysis</h1>
+            </div>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="input-output-container">
+        <h2>Multimodal Sentiment Analysis</h2>
+        
+        <!-- Form to input image and text -->
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="input-fields">
+                {{ form.image }}
+                {{ form.text }}
+                <button type="submit" class="submit-btn">Analyze Sentiment</button>
+            </div>
+        </form>
+
+        <!-- Output section after analysis -->
+        {% if sentiment %}
+        <div class="output-section">
+            <p class="sentiment-output">Sentiment: <span style="color: {{ sentiment_color }}">{{ sentiment }}</span></p>
+            <div class="rating">{{ rating }}</div>
+        </div>
+        {% endif %}
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Sentiment Analyzer. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Multimodal Sentiment Analysis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #34495e;
+            color: white;
+            padding: 15px 0;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .register-form {
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .register-form h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .register-form input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .register-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #ff6f61;
+            color: white;
+            font-size: 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .register-form button:hover {
+            background-color: #27ae60;
+            transform: scale(1.05);
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        footer {
+            background-color: #34495e;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .header-buttons {
+            position: absolute;
+            right: 20px;
+        }
+
+        .header-buttons a {
+            text-decoration: none;
+            color: white;
+            background: #e74c3c;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-left: 10px;
+            transition: 0.3s;
+        }
+
+        .header-buttons a:hover {
+            background: #c0392b;
+        }
+        header {
+            background-color: #34495e;
+            color: white;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            padding: 15px 20px;
+            font-size: 20px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title {
+            flex: 1;
+            text-align: center;
+        }
+        .error-messages {
+            background-color: #ffdddd;
+            color: #d8000c;
+            border: 1px solid #d8000c;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-title">Multimodal Sentiment Analysis</div>
+        <div class="header-buttons">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'register' %}">Register</a>
+        </div>
+    </header>
+    <section class="register-form">
+        <h2>Register</h2>
+        {% if messages %}
+    <div class="error-messages">
+        {% for message in messages %}
+            <p class="error">{{ message }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+
+        <form id="registerForm" method="post" onsubmit="return validateForm()">
+            {% csrf_token %}
+            <input type="text" id="username" name="username" placeholder="Username" required>
+            <input type="email" id="email" name="email" placeholder="Email Address" required>
+            <input type="password" id="password1" name="password1" placeholder="Password" required>
+            <input type="password" id="password2" name="password2" placeholder="Confirm Password" required>
+            <button type="submit">Register</button>
+        </form>
+        {% comment %} <p id="error-message" class="error"></p> {% endcomment %}
+    </section>
+    <footer>
+        <p>&copy; 2025 Sentiment Analyzer. All rights reserved.</p>
+    </footer>
+    <script>
+        function validateForm() {
+            var username = document.getElementById("username").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password1").value;
+            var confirmPassword = document.getElementById("password2").value;
+            var errorMessage = document.getElementById("error-message");
+            
+            errorMessage.textContent = "";
+
+            var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            if (!emailPattern.test(email)) {
+                errorMessage.textContent = "Please enter a valid email address.";
+                return false;
+            }
+
+            if (password !== confirmPassword) {
+                errorMessage.textContent = "Passwords do not match.";
+                return false;
+            }
+
+            if (password.length < 6) {
+                errorMessage.textContent = "Password must be at least 6 characters long.";
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>

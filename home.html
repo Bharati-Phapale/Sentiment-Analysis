@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multimodal Sentiment Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #eef2f3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Navigation Bar */
+        header {
+            width: 100%;
+            background: #34495e;
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            margin: auto;
+        }
+
+        .logo h1 {
+            color: white;
+            font-size: 24px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ffcc00;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 100px;
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #1e3a8a, #34495e);
+            color: white;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero h2 {
+            font-size: 48px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        /* Buttons */
+        .cta-button {
+            display: inline-block;
+            background: #ff6f61;
+            color: white;
+            font-size: 18px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            margin: 10px;
+        }
+
+        .cta-button:hover {
+            background: #ff4500;
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background: #34495e;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 36px;
+            }
+            .hero p {
+                font-size: 18px;
+            }
+            .cta-button {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h2 {
+                font-size: 28px;
+            }
+            .hero p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>Multimodal Sentiment Analysis</h1>
+            </div>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'register' %}">Register</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>Analyze Text and Images for Sentiment Detection</h2>
+        <p>"Achieve precise sentiment analysis with advanced multimodal techniques."</p>
+        <button class="cta-button" onclick="window.location.href='{% url 'login' %}'">Login</button>
+        <button class="cta-button" onclick="window.location.href='{% url 'register' %}'">Register</button>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Sentiment Analyzer. All rights reserved.</p>
+    </footer>
+</body>
+</html>
